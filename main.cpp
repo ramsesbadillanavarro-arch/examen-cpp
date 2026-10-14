@@ -20,12 +20,15 @@ double calcularSubtotal(const vector<Producto>& productos) {
 
 // Devuelve el descuento que corresponde al subtotal
 double calcularDescuento(double subtotal) {
+    if (subtotal > 50000) {
+        return subtotal * 0.10;
+    }
     return 0;
 }
 
 // Devuelve el impuesto que corresponde a la base
 double calcularImpuesto(double base) {
-    return 0;
+    return base * 0.13;
 }
 
 int main() {
@@ -40,12 +43,20 @@ int main() {
         cout << productos[i].nombre << " x" << productos[i].cantidad
              << " = " << productos[i].precio * productos[i].cantidad << endl;
     }
-
+    
     double subtotal = calcularSubtotal(productos);
     cout << "Subtotal: " << subtotal << endl;
 
     // Se calcula el descuento, la base, el impuesto y el total.
+    double descuento = calcularDescuento(subtotal);
+    double base = subtotal - descuento;
+    double impuesto = calcularImpuesto(base);
+    double total = base + impuesto;
+
     // Luego imprime las lineas Descuento, Impuesto y Total.
+    cout << "Descuento: " << descuento << endl;
+    cout << "Impuesto: " << impuesto << endl;
+    cout << "Total: " << total << endl;
 
     return 0;
 }
